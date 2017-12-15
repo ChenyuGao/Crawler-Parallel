@@ -27,6 +27,8 @@ int tr_add_string(TREE *tree, char *P, int M, int id)
 
 	int i = 0, j, flag;
 	TNodePtr currentNode, preNode, newNode;
+	if (id == 0 || id <= tree->uNum)
+		return -1;
 	if (tree->uNum == 0)  //还未添加url
 	{
 		currentNode = tree->root;
@@ -39,7 +41,7 @@ int tr_add_string(TREE *tree, char *P, int M, int id)
 			if (i == M - 1)
 				newNode->ID = id;
 			else
-				newNode->ID = -1;
+				newNode->ID = 0;
 			currentNode->next = newNode;
 			currentNode = currentNode->next;
 		}
@@ -69,10 +71,10 @@ int tr_add_string(TREE *tree, char *P, int M, int id)
 			flag = 2;
 		}
 	}
-	//同样的链接以前一个的编号为准
+	//先插入长串，再插入短串，比如先插AABAB，再插入AAB
 	if (i == M)
     {
-        if(preNode->ID == -1)
+        if(preNode->ID == 0)
         {
             tree->uNum++;
             preNode->ID = id;
@@ -88,7 +90,7 @@ int tr_add_string(TREE *tree, char *P, int M, int id)
 	if (i == M - 1)
 		newNode->ID = id;
 	else
-		newNode->ID = -1;
+		newNode->ID = 0;
 	currentNode = preNode;
 	if (flag == 0)
 	{
@@ -124,7 +126,7 @@ int tr_add_string(TREE *tree, char *P, int M, int id)
 		if (i == M - 1)
 			newNode->ID = id;
 		else
-			newNode->ID = -1;
+			newNode->ID = 0;
 		currentNode->next = newNode;
 		currentNode = currentNode->next;
 	}

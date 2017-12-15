@@ -69,11 +69,11 @@ int handleURLs(Queue *queue_url, BF bf, char* serverip, int port)
                     int code = atoi(d);
                     if(code == 200)
                     {
+                        urlsNum++;   // 从1开始编号并存入数组
                         URLs[urlsNum] = arg->urlName;
                         fprintf(url, "http://news.sohu.com%s %d\n", arg->urlName, urlsNum);   // 写入 url.txt 文件
                         // 在此处加入到树中
                         DFA(sourceCode, queue_url, bf, urlsNum);
-			urlsNum++;   // 从0开始编号并存入数组
                     }
                     else
                     {
