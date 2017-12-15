@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
     // 对数组URLs,索引从1到urlsNum加入三叉树
 	TREE *tree = tr_alloc();
 	printf("\n开始建树:\n");
-    for(int u = 1; u<urlsNum; u++)
+    for(int u = 0; u<urlsNum; u++)
     {
         int len1 = strlen(URLs[u]);
         tr_add_string(tree, URLs[u], len1, u);
@@ -79,7 +79,7 @@ int main(int argc, char* argv[])
         destID = tr_search(tree, urlLen, tempdestURL);
         if(sourceID == destID)
             continue;
-        if(destID > 0)
+        if(destID >= 0)
         {
             // 去掉重复的sourceID->destID对
             flagrep = 0;    
@@ -118,7 +118,7 @@ int main(int argc, char* argv[])
     printf("正确的链接数量共有: %d 个\n", num);
     fclose(tempurlfile);
     fclose(url);
-    //remove("tempurlfile.txt");
+    remove("tempurlfile.txt");
     printf("\n程序结束!\n");
 	return 0;
 }
